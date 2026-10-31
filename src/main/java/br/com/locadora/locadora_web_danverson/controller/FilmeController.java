@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/filmes") //Define o /filmes como inicio de todas as rotas da classe
+@RequestMapping("/filmes") //Define o /filmes como início de todas as rotas da classe
 
 public class FilmeController {
     private final LocadoraService service; //guarda referencia do service usado pelo controller
@@ -24,14 +24,14 @@ public class FilmeController {
         model.addAttribute("filme", new Filme()); //Envia um objeto vazio chamado filme para o formulário
         return "filmes/formulario";
     }
-    @PostMapping("/salvar") // Cria a rota post que recebe o nome do formulario
-    public String salvarFilmes(
+    @PostMapping("/salvar") // Cria a rota post que recebe o nome do formulário
+    public String salvarFilme(
             @ModelAttribute Filme filme,
             Model model // Pede ao Spring para preencher o objeto filme para os dados enviados
     ){
         try{//inicia um bloco que pode gerar erro de regra
             service.cadastrarFilme(filme); //Entrega o objeto ao service
-            return "redirect:/filmes?sucesso=true"; // Manda o navegador abrir a listagem dos filmes e acrescenta um parametro de sucesso
+            return "redirect:/filmes?sucesso=true"; // Manda o navegador abrir a listagem dos filmes e acrescenta um parâmetro de sucesso
         }catch (IllegalArgumentException erro){ // Captura uma regra invalida lancada pelo service
             model.addAttribute("mensagemErro", erro.getMessage()); //Obter a mensagem de erro
             return "filmes/formulario";

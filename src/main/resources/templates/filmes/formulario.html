@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar filme</title>
-    <link rel="stylesheet" th:ref="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<header class="cabecalho"></header>
+<header class="cabecalho">
 <p class="aluno">Danverson</p>
 <h1>Locadora Danverson</h1>
 <p>Cadastro de Filmes</p>
+</header>
 <main class="conteudo">
     <section class="painel-formulario">
         <h2>Cadastrar filme</h2>
@@ -18,7 +19,7 @@
            th:if="${mensagemErro}"
            th:text="${mensagemErro}"></p>
         <form th:action="@{/filmes/salvar}"
-        th:object="${filmes}"
+        th:object="${filme}"
         method="post">
         <div class="campo">
             <label for="nome">Nome</label>

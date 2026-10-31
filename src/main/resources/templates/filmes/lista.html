@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filmes cadastrados</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <header class="cabecalho">
@@ -13,45 +14,59 @@
 </header>
 <main class="conteudo">
     <section class="painel-listagem">
+
         <div class="cabecalho-pagina">
             <h2>Lista de filmes</h2>
-            <a class="botao-principal" th:href="@{/filmes/novo}">Cadastrar novo filme</a>
-            <p class="mensagem-sucesso" th:if="${param.sucesso}"><!-- Lê o parâmetro sucesso presente na URL -->
-                Filme cadastrado com sucesso
-            </p>
-            <p class="lista-vazia" th:if="${filmes.isEmpty()}"><!-- Verifica se a lista está vazia-->
-                Nenhum filme cadastrado
-            </p>
-            <div class="tabela-container" th:if="${filmes.isEmpty()}">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nome</th>
-                        <th>Gênero</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    < th:each="filme:${filmes}"><!-- repete a linha para cada filme da lista -->
-                    <td th:text="${filme.codigo}">1</td><!-- Acessa o getCogigo do objeto atual -->
-                    <td th:text="${filme.nome}">Matrix</td><!-- Acessa o getNome do objeto atual -->
-                    <td th:text="${filme.genero}">Ficção</td><!-- Acessa o getGenero do objeto atual -->
+            <a class="botao-principal" th:href="@{/filmes/novo}">
+                Cadastrar novo filme
+            </a>
+        </div>
+
+        <p class="mensagem-sucesso" th:if="${param.sucesso}">
+            Filme cadastrado com sucesso
+        </p>
+
+        <p class="lista-vazia" th:if="${filmes.isEmpty()}">
+            Nenhum filme cadastrado
+        </p>
+
+        <div class="tabela-container" th:if="${!filmes.isEmpty()}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Gênero</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="filme : ${filmes}">
+                    <td th:text="${filme.codigo}">1</td>
+                    <td th:text="${filme.nome}">Matrix</td>
+                    <td th:text="${filme.genero}">Ficção</td>
                     <td>
-                        <span th:if="${filme.alugado}" class="status-alugado">Alugado</span>
-                        <!-- Mostra alugado quando isAlugado() retorna true -->
-                        <span th:unless="${filme.alugado}" class="status-disponivel">Disponível</span>
-                        <!-- Mostra disponível quando isAlugado() retorna false -->
+                            <span th:if="${filme.alugado}" class="status-alugado">
+                                Alugado
+                            </span>
+                        <span th:unless="${filme.alugado}" class="status-disponivel">
+                                Disponível
+                            </span>
                     </td>
-                    </tbody>
-                </table>
-            </div>
-            <div class="acoes">
-                <a class="botao-secundario" th:href="@{/}">Voltar ao menu</a>
-            </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="acoes">
+            <a class="botao-secundario" th:href="@{/}">
+                Voltar ao menu
+            </a>
+        </div>
+
     </section>
-</main>
-<footer class="rodape">
+</main><footer class="rodape">
     <p>Projeto de Programação Orientada a objetos I</p>
 </footer>
 </body>
